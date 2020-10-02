@@ -6,20 +6,20 @@ const cors = require('cors');
 require('dotenv/config')
 
 //Import routes
-const postRoute = require('./routes/posts')
-const carRoute = require('./routes/cars')
-const departmentRoute = require('./routes/departments')
-const opinionsRoute = require('./routes/opinions')
-const rentalsRoute = require('./routes/rentals')
-const rolesRoute = require('./routes/roles')
-const usersRoute = require('./routes/users')
 
+const indexRouter = require('./routes/index');
+const catalogRouter = require('./routes/catalog');
+
+//Configuration
 app.use(cors());
-
 app.use(bodyParser.json());
 
-app.use('/post',postRoute);
-app.use('/cars', carRoute);
+//Middleware
+
+app.use('/', indexRouter);
+app.use('/catalog', catalogRouter);
+
+
 
 app.use(express.static('public')) // for serving files
 
@@ -31,13 +31,13 @@ app.use(express.static('public')) // for serving files
 
 // ROUTES
 
-app.get('/',(req, res) => {
+/*app.get('/',(req, res) => {
    res.send('hello world home');
 });
 
 app.get('/post',(req, res) => {
     res.send('hello world post');
-});
+});*/
 
 //Connect to db
 mongoose.connect(

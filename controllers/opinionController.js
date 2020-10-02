@@ -1,17 +1,15 @@
-const express = require('express')
-const router = express.Router();
-const Opinion = require('../models/Opinion')
+const Opinion = require('../models/Opinion');
 
-router.get('/',(async (req, res) => {
+exports.opinion_list = async (req,res) => {
     try{
         const opinions = await Opinion.find();
         res.json(opinions);
     } catch (err){
         res.json({message: err})
     }
-}));
+}
 
-router.post('/',async (req, res) => {
+exports.opinion_create_post = async (req,res) => {
     const opinion = new Opinion({
         content: req.body.content,
         stars: req.body.stars,
@@ -23,6 +21,4 @@ router.post('/',async (req, res) => {
     } catch (err){
         res.json({message: err})
     }
-});
-
-module.exports = router;
+}

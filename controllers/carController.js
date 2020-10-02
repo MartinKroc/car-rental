@@ -1,17 +1,15 @@
-var express = require('express')
-var router = express.Router();
-const Car = require('../models/Car')
+const Car = require('../models/Car');
 
-router.get('/',(async (req, res) => {
+exports.car_list = async (req,res) => {
     try{
         const cars = await Car.find();
         res.json(cars);
     } catch (err){
         res.json({message: err})
     }
-}));
+}
 
-router.post('/',async (req, res) => {
+exports.car_create_post = async (req,res) => {
     const car = new Car({
         brand: req.body.brand,
         description: req.body.description,
@@ -28,6 +26,4 @@ router.post('/',async (req, res) => {
     } catch (err){
         res.json({message: err})
     }
-});
-
-module.exports = router;
+}

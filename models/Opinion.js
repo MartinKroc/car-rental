@@ -7,7 +7,7 @@ const OpinionSchema = Schema({
         type: String,
         required: true
     },
-    mark: {
+    stars: {
         type: Number,
         required: true
     },

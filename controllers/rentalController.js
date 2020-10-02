@@ -1,17 +1,15 @@
-const express = require('express')
-const router = express.Router();
-const Rental = require('../models/Rental')
+const Rental = require('../models/Rental');
 
-router.get('/',(async (req, res) => {
+exports.rental_list = async (req,res) => {
     try{
         const rentals = await Rental.find();
         res.json(rentals);
     } catch (err){
         res.json({message: err})
     }
-}));
+}
 
-router.post('/',async (req, res) => {
+exports.rental_create_post = async (req,res) => {
     const rental = new Rental({
         since: req.body.since,
         to: req.body.to,
@@ -26,6 +24,4 @@ router.post('/',async (req, res) => {
     } catch (err){
         res.json({message: err})
     }
-});
-
-module.exports = router;
+}

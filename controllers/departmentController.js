@@ -1,17 +1,24 @@
-const express = require('express')
-const router = express.Router();
-const Department = require('../models/Department')
+const Department = require('../models/Department');
 
-router.get('/',(async (req, res) => {
+exports.department_list = async (req,res) => {
     try{
         const departments = await Department.find();
         res.json(departments);
     } catch (err){
         res.json({message: err})
     }
-}));
+}
 
-router.post('/',async (req, res) => {
+exports.department_detail_get = async (req,res) => {
+    try{
+        const departments = await Department.find();
+        res.json(departments);
+    } catch (err){
+        res.json({message: err})
+    }
+}
+
+exports.department_create_post = async (req,res) => {
     const department = new Department({
         name: req.body.name,
         geoLoc: req.body.geoLoc,
@@ -25,6 +32,4 @@ router.post('/',async (req, res) => {
     } catch (err){
         res.json({message: err})
     }
-});
-
-module.exports = router;
+}
